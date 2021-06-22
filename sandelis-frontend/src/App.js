@@ -63,7 +63,7 @@ export default function App() {
         Client Type:
         <input
           name="clienttype"
-          type="clienttype"
+          type="checkbox"
           value={clienttype}
           onChange={e => setClientType(e.target.value)}
           required />
