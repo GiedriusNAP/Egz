@@ -1,80 +1,56 @@
-import React from "react";
+import React from 'react';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default function App() {
-  const [name, setName] = React.useState("");
-  const [surname, setSurName] = React.useState("");
-  const [date, setBirthDate] = React.useState("");
-  const [phonenumb, setPhoneNumber] = React.useState("");
-  const [, setClientType] = React.useState("");
+import { history } from '../_helpers';
+import { alertActions } from '../_actions';
+import { PrivateRoute } from '../_components';
+import { HomePage } from '../HomePage';
+import { CreateClientPage } from './CreateClient';
+import { CreateInventoryPage } from './CreateInventory.';
 
+class App extends React.Component {
+    constructor(props) {
+        super(props);
 
-  const handleSubmit = (event) => {
-    console.log(`
-      Name: ${"Petras"}
-      Surname: ${"Petras"}
-    `);
-    
-    event.preventDefault();
-  }
+        history.listen((location, action) => {
+            // clear alert on location change
+            this.props.clearAlerts();
+        });
+    }
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <h1>Create Client</h1>
-
-      <label>
-        Name:
-        <input
-          name="name"
-          type="name"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          required />
-      </label>
-      <label>
-        Surname:
-        <input
-          name="surname"
-          type="surname"
-          value={surname}
-          onChange={e => setSurName(e.target.value)}
-          required />
-      </label>
-      <label>
-        Birth Date:
-        <input
-          name="date"
-          type="date"
-          value={date}
-          onChange={e => setBirthDate(e.target.value)}
-          required />
-      </label>
-      <label>
-        Phone Number:
-        <input
-          name="phonenumb"
-          type="phonenumb"
-          value={phonenumb}
-          onChange={e => setPhoneNumber(e.target.value)}
-          required />
-      </label>
-      
-      <label>
-          įprastinis:
-          <input
-            name="clientype"
-            type="checkbox"
-            onChange={e => setClientType(e.target.value)}
-          required />
-          lojalus klientas:
-           <input
-            name="clientype"
-            type="checkbox"
-            onChange={e => setClientType(e.target.value)}
-          required />
-        </label>
-
-
-      <button>Submit</button>
-    </form>
-  );
+    render() {
+        const { alert } = this.props;
+        return (
+            <div className="jumbotron">
+                <div className="container">
+                    <div className="col-sm-8 col-sm-offset-2">
+                        {alert.message &&
+                            <div className={`alert ${alert.type}`}>{alert.message}</div>
+                        }
+                        <Router >
+                            <Switch>
+                                <PrivateRoute exact path="/" component={HomePage} />
+                                <Route path="/CreateClient" component={CreateClientPage} />
+                                <Route path="/CreateInventory" component={CreateInventoryPage} />
+                                <Redirect from="*" to="/" />
+                            </Switch>
+                        </Router>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
+
+function mapState(state) {
+    const { alert } = state;
+    return { alert };
+}
+
+const actionCreators = {
+    clearAlerts: alertActions.clear
+};
+
+const connectedApp = connect(mapState, actionCreators)(App);
+export { connectedApp as App };
