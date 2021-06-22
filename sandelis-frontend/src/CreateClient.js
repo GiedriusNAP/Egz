@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function App() {
+export default function CreateClient() {
   const [name, setName] = React.useState("");
   const [surname, setSurName] = React.useState("");
   const [date, setBirthDate] = React.useState("");
