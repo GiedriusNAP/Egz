@@ -25,7 +25,7 @@ export default function App() {
         Name:
         <input
           name="name"
-          type="name"
+          type="string"
           value={name}
           onChange={e => setName(e.target.value)}
           required />
@@ -34,7 +34,7 @@ export default function App() {
         Surname:
         <input
           name="surname"
-          type="surname"
+          type="string"
           value={surname}
           onChange={e => setSurName(e.target.value)}
           required />
@@ -52,7 +52,7 @@ export default function App() {
         Phone Number:
         <input
           name="phonenumb"
-          type="phonenumb"
+          type="number"
           value={phonenumb}
           onChange={e => setPhoneNumber(e.target.value)}
           required />
@@ -65,6 +65,7 @@ export default function App() {
             type="checkbox"
             onChange={e => setClientType(e.target.value)}
           required />
+        
           lojalus klientas:
            <input
             name="clientype"

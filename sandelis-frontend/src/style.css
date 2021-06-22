@@ -10,7 +10,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #4A4E69;
+    background-color: #a7b3ff;
   }
   
   form {
@@ -84,7 +84,7 @@
     color: #fefefe;
   }
   button:hover {
-    background-color: #4A4E69;
+    background-color: #b1bcff;
     color: #fefefe;
   }
   
