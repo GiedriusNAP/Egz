@@ -58,17 +58,20 @@ export default function App() {
           required />
       </label>
       
-      
       <label>
-        Client Type:
-        <input
-          name="clienttype"
-          type="clienttype"
-          value={clienttype}
-          onChange={e => setClientType(e.target.value)}
+          įprastinis:
+          <input
+            name="clientype"
+            type="checkbox"
+            onChange={e => setClientType(e.target.value)}
           required />
-          <checkbox/>
-      </label>
+          lojalus klientas:
+           <input
+            name="clientype"
+            type="checkbox"
+            onChange={e => setClientType(e.target.value)}
+          required />
+        </label>
 
 
       <button>Submit</button>
